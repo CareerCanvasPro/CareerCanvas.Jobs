@@ -12,7 +12,9 @@ https://jobs.careercanvas.pro/api/v1
 
 All API endpoints require an API key passed in the header:
 
+```plaintext
 X-API-Key: your_api_key_here
+```
 
 ## Endpoints
 
@@ -32,30 +34,30 @@ GET /jobs
 
 Response:
 
-```
+```json
 {
-    "items": [
-        {
-            "id": "string",
-            "title": "string",
-            "company": "string",
-            "location": "string",
-            "job_type": "string",
-            "salary_range": {
-                "min": "number",
-                "max": "number",
-                "currency": "string"
-            },
-            "description": "string",
-            "requirements": "string",
-            "posted_date": "string",
-            "source": "string",
-            "url": "string"
-        }
-    ],
-    "total": "number",
-    "page": "number",
-    "pages": "number"
+  "items": [
+    {
+      "id": "string",
+      "title": "string",
+      "company": "string",
+      "location": "string",
+      "job_type": "string",
+      "salary_range": {
+        "min": "number",
+        "max": "number",
+        "currency": "string"
+      },
+      "description": "string",
+      "requirements": "string",
+      "posted_date": "string",
+      "source": "string",
+      "url": "string"
+    }
+  ],
+  "total": "number",
+  "page": "number",
+  "pages": "number"
 }
 ```
 
@@ -65,32 +67,33 @@ Response:
 GET /jobs/{id}
 ```
 
-```
+```json
 {
-    "id": "string",
-    "title": "string",
-    "company": "string",
-    "company_url": "string",
-    "location_country": "string",
-    "location_city": "string",
-    "location_state": "string",
-    "job_type": "string",
-    "salary_interval": "string",
-    "salary_min": "number",
-    "salary_max": "number",
-    "currency": "string",
-    "description": "string",
-    "is_remote": "boolean",
-    "date_posted": "string",
-    "source_site": "string",
-    "job_url": "string"
+  "id": "string",
+  "title": "string",
+  "company": "string",
+  "company_url": "string",
+  "location_country": "string",
+  "location_city": "string",
+  "location_state": "string",
+  "job_type": "string",
+  "salary_interval": "string",
+  "salary_min": "number",
+  "salary_max": "number",
+  "currency": "string",
+  "description": "string",
+  "is_remote": "boolean",
+  "date_posted": "string",
+  "source_site": "string",
+  "job_url": "string"
 }
-
 ```
 
 ## Search Jobs
 
+```http
 GET /jobs/search
+```
 
 Query Parameters:
 
@@ -105,6 +108,7 @@ Query Parameters:
 
 Response:
 
+```json
 {
 "items": [...],
 "total": "number",
@@ -120,58 +124,71 @@ Response:
 }]
 }
 }
+```
 
 Get Job Statistics
 
+```http
 GET /jobs/stats
-Response:
-{
-"total_jobs": "number",
-"active_jobs": "number",
-"jobs_by_source": {
-"LinkedIn": "number",
-"Indeed": "number",
-"BdJobs": "number"
-},
-"jobs_by_type": {
-"FULL_TIME": "number",
-"PART_TIME": "number",
-"CONTRACT": "number",
-"REMOTE": "number"
-},
-"top_locations": [
-{
-"country": "string",
-"count": "number"
-}
-]
-}
+```
 
-Error Responses
+Response:
+
+```json
+{
+  "total_jobs": "number",
+  "active_jobs": "number",
+  "jobs_by_source": {
+    "LinkedIn": "number",
+    "Indeed": "number",
+    "BdJobs": "number"
+  },
+  "jobs_by_type": {
+    "FULL_TIME": "number",
+    "PART_TIME": "number",
+    "CONTRACT": "number",
+    "REMOTE": "number"
+  },
+  "top_locations": [
+    {
+      "country": "string",
+      "count": "number"
+    }
+  ]
+}
+```
+
+### Error Responses
 
 All endpoints may return the following error responses:
 
 ### 400 Bad Request
 
+```json
 {
-"error": "VALIDATION_ERROR",
-"message": "Error description",
-"details": {
-"field": ["error detail"]
+  "error": "VALIDATION_ERROR",
+  "message": "Error description",
+  "details": {
+    "field": ["error detail"]
+  }
 }
-}
+```
 
 ### 401 Unauthorized
 
+```json
 {
-"error": "UNAUTHORIZED",
-"message": "Invalid or missing API key"
+  "error": "UNAUTHORIZED",
+  "message": "Invalid or missing API key"
 }
+```
 
 ### 429 Too Many Requests
 
+```json
 {
-"error": "RATE_LIMIT_EXCEEDED",
-"message": "Too many requests",
-"retry_after": "number"
+  "error": "RATE_LIMIT_EXCEEDED",
+  "message": "Too many requests",
+  "retry_after": "number"
 }
+```
